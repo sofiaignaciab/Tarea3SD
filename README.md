@@ -87,7 +87,9 @@ DESCRIBE branch_traces;
 ```
 SELECT * FROM branch_traces LIMIT 10;
 ```
-
+---
+# Data Analysis: Hive
+Run the querys that are in script: [[hive.sql]]
 ---
 
 # Data Analysis: Pig
