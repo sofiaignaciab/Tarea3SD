@@ -1,3 +1,0 @@
-SELECT branch_type, COUNT(*) AS frequency
-FROM branches
-GROUP BY branch_type;

@@ -1,3 +1,0 @@
-SELECT branch_type, taken, COUNT(*) AS count
-FROM branches
-GROUP BY branch_type, taken;

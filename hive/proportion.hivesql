@@ -1,4 +1,0 @@
-   SELECT branch_type, 
-       SUM(CASE WHEN taken = 1 THEN 1 ELSE 0 END) * 1.0 / COUNT(*) AS proportion
-FROM branches
-GROUP BY branch_type;

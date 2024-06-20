@@ -1,15 +1,19 @@
-# Installation
+# Hadoop, Pig & Hive
 Use the repository:
 ```
 https://github.com/suhothayan/hadoop-spark-pig-hive
 ```
 From this repository, pull the image:
-```
+```shell
 docker pull suhothayan/hadoop-spark-pig-hive:2.9.2
 ```
-After running the container:
-```
+Run the container:
+```shell
 docker run -it -p 50070:50070 -p 8088:8088 -p 8080:8080 suhothayan/hadoop-spark-pig-hive:2.9.2 bash
+```
+Open the container:
+```shell
+sudo docker excec -it hadoop-spark-pig-hive-container /bin/bash/
 ```
 To check if it works:
 ```
@@ -28,18 +32,23 @@ hive
 
 # Data Loading
 In bash:
-```
-sudo docker cp root/to/directory/charlie_trace-1_17571657100049929577.branch_trace.940210.csv <containerID>:/root/
+```bash
+sudo docker cp path/to/charlie_trace.csv <containerID>:/root/
 ```
 To check if it was copied correctly, check inside the container:
 ```
 ls /root
 ```
+## HDFS Data Loading
+Create the directory:
+```shell
+hdfs dfs -mkdir -p /user/hadoop/branch_traces
+```
 Copy it to a directory:
+```shell
+hadoop fs -put /root/charlie_trace-1_17571657100049929577.branch_trace.940210.csv /user/hadoop/branch_traces
 ```
-hadoop fs -put /root/charlie_trace-1_17571657100049929577.branch_trace.940210.csv /user/hive/warehouse/branch_traces
-```
-
+Check the file:
 ```
 hadoop fs -ls
 ```
@@ -81,4 +90,21 @@ SELECT * FROM branch_traces LIMIT 10;
 
 ---
 
-# Data Analysis: Hive# Tarea3SD
+# Data Analysis: Pig
+If you want to make just one explanatory analysis, copy the script to the container:
+```
+sudo docker cp analyze.pig <containerID>:/home/
+```
+And run:
+```
+pig analyze.pig
+```
+If that's not the case, copy the directory to the container:
+```
+sudo docker cp pig <containerID>:/home/
+```
+Then run:
+```
+pig i-function.pig
+```
+In this case, you have to run the files that are in pig directory one by one.
