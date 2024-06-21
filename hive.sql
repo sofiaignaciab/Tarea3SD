@@ -1,3 +1,21 @@
+-- Create table
+CREATE TABLE branches (
+    branch_addr STRING,
+    branch_type STRING,
+    taken INT,
+    target STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+
+-- Load data
+LOAD DATA INPATH '/user/root/charlie_trace-1_17571657100049929577.branch_trace.940210.csv' INTO TABLE branches;
+
+--Verify data limit 10
+SELECT * FROM branches LIMIT 10;
+
 -- Count the total number of records in the branches table
 SELECT COUNT(*) FROM branches;
 
