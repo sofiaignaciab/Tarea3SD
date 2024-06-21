@@ -19,3 +19,7 @@ STORE branch_taken_relation INTO 'file:///home/output/relation_taken' USING PigS
 branch_taken_proportion = FOREACH (GROUP branches BY branch_type) GENERATE group AS branch_type, 
                          (double)SUM(branches.taken) / COUNT(branches) AS proportion;
 STORE branch_taken_proportion INTO 'file:///home/output/taken_proportion' USING PigStorage(',');
+
+-- Visualize sample data
+data_sample = LIMIT branches 10;
+DUMP data_sample;
